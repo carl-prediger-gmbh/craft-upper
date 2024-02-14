@@ -1,6 +1,6 @@
 {
-  "name": "ostark/upper",
-  "description": "A cache plugin for Craft - supporting multiple Edge Caches",
+  "name": "Carl-Prediger-GmbH/craft-upper",
+  "description": "A cache plugin for Craft - supporting multiple Edge Caches (forked from ostark/upper)",
   "type": "craft-plugin",
   "keywords": [
     "craft",
@@ -13,18 +13,22 @@
     "keycdn"
   ],
   "support": {
-    "docs": "https://github.com/ostark/upper/blob/master/README.md",
-    "issues": "https://github.com/ostark/upper/issues"
+    "docs": "https://github.com/Carl-Prediger-GmbH/craft-upper/blob/master/README.md",
+    "issues": "https://github.com/Carl-Prediger-GmbH/craft-upper/issues"
   },
   "license": "MIT",
   "authors": [
     {
       "name": "Oliver Stark",
       "homepage": "https://www.fortrabbit.com"
+    },
+    {
+      "name": "Thorsten Wehage",
+      "homepage": "https://www.prediger.de"
     }
   ],
   "require": {
-    "craftcms/cms": "^3.2.0",
+    "craftcms/cms": "^4.0.0",
     "guzzlehttp/guzzle": "^6.5.5|^7.2.0"
   },
   "require-dev": {
@@ -32,7 +36,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ostark\\upper\\": "src/"
+      "prediger\\upper\\": "src/"
     }
   },
   "scripts": {
@@ -44,6 +48,6 @@
     "handle": "upper",
     "hasCpSettings": false,
     "hasCpSection": false,
-    "changelogUrl": "https://raw.githubusercontent.com/ostark/upper/master/CHANGELOG.md"
+    "changelogUrl": "https://raw.githubusercontent.com/Carl-Prediger-GmbH/craft-upper/master/CHANGELOG.md"
   }
 }
