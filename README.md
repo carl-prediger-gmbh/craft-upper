@@ -1,13 +1,4 @@
-<img src="https://github.com/ostark/upper/blob/master/resources/upper.png" height="80px"/>
-
-
-# The pep pill for your Craft site
-
-[![Latest Stable Version](https://poser.pugx.org/ostark/upper/v/stable)](https://packagist.org/packages/ostark/upper)
-[![Total Downloads](https://poser.pugx.org/ostark/upper/downloads)](https://packagist.org/packages/ostark/upper)
-[![Monthly Downloads](https://poser.pugx.org/ostark/upper/d/monthly)](https://packagist.org/packages/ostark/upper)
-
-
+<img src="https://github.com/Carl-Prediger-GmbH/craft-upper/blob/master/resources/upper.png" height="80px"/>
 
 Upper speeds up Craft dramatically using a **Cache Proxy** in front of your webserver. 
 
@@ -21,7 +12,7 @@ If you need an introduction to HTTP Caching, I highly recommend [this article](h
 Development happens in my free time, but also during working hours. 
 Thanks [fortrabbit.com](https://www.fortrabbit.com/craft-hosting)!
 
-If you are looking additional integrations (Cache Drivers), feel free to contribute or [raise an issue](https://github.com/ostark/upper/issues).
+If you are looking additional integrations (Cache Drivers), feel free to contribute or [raise an issue](https://github.com/Carl-Prediger-GmbH/craft-upper/issues).
 
 ## Supported Cache Drivers
 
@@ -33,11 +24,18 @@ If you are looking additional integrations (Cache Drivers), feel free to contrib
 
 ## Installation
 
-1. Install with Composer via `composer require ostark/upper` from your project directory
-2. Install plugin with this command `php craft plugin/install upper` or in the Craft CP under Settings > Plugins
-3. A new configuration file gets generated automatically in `your-project/config/upper.php`.
-
-
+1. Clone this repository into your plugins folder `plugins\craft-upper`
+2. Add the plugin to your composer.json
+```
+"repositories": [
+    {
+        "type": "path",
+        "url": "plugins/craft-upper"
+    },
+    ...
+```
+3. Install plugin with this command `php craft plugin/install upper` or in the Craft CP under Settings > Plugins
+4. A new configuration file gets generated automatically in `your-project/config/upper.php`.
 
 ### Fastly Setup
 
@@ -107,10 +105,10 @@ By default the `defaultMaxAge` config setting will be used to determine the cach
 ```
 
 ### Performance results
-![example](https://github.com/ostark/upper/blob/master/resources/preformance.png)
+![example](https://github.com/Carl-Prediger-GmbH/craft-upper/blob/master/resources/preformance.png)
 
 ### Cache Tag Headers
-![example](https://github.com/ostark/upper/blob/master/resources/response-header.png)
+![example](https://github.com/Carl-Prediger-GmbH/craft-upper/blob/master/resources/response-header.png)
 
 
 ## Disclaimer

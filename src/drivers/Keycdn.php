@@ -1,13 +1,13 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use ostark\upper\exceptions\KeycdnApiException;
+use prediger\upper\exceptions\KeycdnApiException;
 
 /**
  * Class Keycdn Driver
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  */
 class Keycdn extends AbstractPurger implements CachePurgeInterface
 {
@@ -70,7 +70,7 @@ class Keycdn extends AbstractPurger implements CachePurgeInterface
      * @param array  $params
      *
      * @return bool
-     * @throws \ostark\upper\exceptions\KeycdnApiException
+     * @throws \prediger\upper\exceptions\KeycdnApiException
      */
     protected function sendRequest($method = 'DELETE', string $type, array $params = [])
     {

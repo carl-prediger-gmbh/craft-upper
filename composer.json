@@ -1,7 +1,8 @@
 {
-  "name": "Carl-Prediger-GmbH/craft-upper",
+  "name": "carl-prediger-gmbh/craft-upper",
   "description": "A cache plugin for Craft - supporting multiple Edge Caches (forked from ostark/upper)",
   "type": "craft-plugin",
+  "version": "1.0.0",
   "keywords": [
     "craft",
     "cms",

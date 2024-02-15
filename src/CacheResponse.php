@@ -1,11 +1,11 @@
-<?php namespace ostark\upper;
+<?php namespace prediger\upper;
 
 use yii\base\Response;
 
 class CacheResponse
 {
     /**
-     * @var \yii\base\Response|\ostark\upper\behaviors\CacheControlBehavior
+     * @var \yii\base\Response|\prediger\upper\behaviors\CacheControlBehavior
      */
     public $response;
 

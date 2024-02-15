@@ -1,11 +1,11 @@
-<?php namespace ostark\upper\events;
+<?php namespace prediger\upper\events;
 
 use yii\base\Event;
 
 /**
  * Class PurgeEvent
  *
- * @package ostark\upper\events
+ * @package prediger\upper\events
  */
 class PurgeEvent extends Event
 {

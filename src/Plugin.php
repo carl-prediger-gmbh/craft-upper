@@ -1,17 +1,18 @@
-<?php namespace ostark\upper;
-
+<?php namespace prediger\upper;
 
 use Craft;
+use craft\web\Application as WebApplication;
+use craft\base\Model;
 use craft\base\Plugin as BasePlugin;
-use ostark\upper\behaviors\CacheControlBehavior;
-use ostark\upper\behaviors\TagHeaderBehavior;
-use ostark\upper\drivers\CachePurgeInterface;
-use ostark\upper\models\Settings;
+use prediger\upper\behaviors\CacheControlBehavior;
+use prediger\upper\behaviors\TagHeaderBehavior;
+use prediger\upper\drivers\CachePurgeInterface;
+use prediger\upper\models\Settings;
 
 /**
  * Class Plugin
  *
- * @package ostark\upper
+ * @package prediger\upper
  *
  * @method models\Settings getSettings()
  */
@@ -41,7 +42,7 @@ class Plugin extends BasePlugin
     const INFO_HEADER_NAME = 'X-UPPER-CACHE';
     const TRUNCATED_HEADER_NAME = 'X-UPPER-CACHE-TRUNCATED';
 
-    public $schemaVersion = '1.0.1';
+    public string $schemaVersion = '1.0.1';
 
 
     /**
@@ -76,14 +77,16 @@ class Plugin extends BasePlugin
         }
 
         // Register Twig extension
-        \Craft::$app->getView()->registerTwigExtension(new TwigExtension);
+        Craft::$app->on(WebApplication::EVENT_INIT, function() {
+            Craft::$app->view->registerTwigExtension(new TwigExtension);
+        });
     }
 
     // ServiceLocators
     // =========================================================================
 
     /**
-     * @return \ostark\upper\drivers\CachePurgeInterface
+     * @return \prediger\upper\drivers\CachePurgeInterface
      */
     public function getPurger(): CachePurgeInterface
     {
@@ -92,11 +95,11 @@ class Plugin extends BasePlugin
 
 
     /**
-     * @return \ostark\upper\TagCollection
+     * @return \prediger\upper\TagCollection
      */
     public function getTagCollection(): TagCollection
     {
-        /* @var \ostark\upper\TagCollection $collection */
+        /* @var \prediger\upper\TagCollection $collection */
         $collection = $this->get('tagCollection');
         $collection->setKeyPrefix($this->getSettings()->getKeyPrefix());
 
@@ -112,7 +115,7 @@ class Plugin extends BasePlugin
      *
      * @return \craft\base\Model|null
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }
@@ -122,7 +125,7 @@ class Plugin extends BasePlugin
      * Is called after the plugin is installed.
      * Copies example config to project's config folder
      */
-    protected function afterInstall()
+    protected function afterInstall(): void
     {
         $configSourceFile = __DIR__ . DIRECTORY_SEPARATOR . 'config.example.php';
         $configTargetFile = \Craft::$app->getConfig()->configDir . DIRECTORY_SEPARATOR . $this->handle . '.php';

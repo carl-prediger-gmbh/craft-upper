@@ -1,13 +1,13 @@
-<?php namespace ostark\upper\jobs;
+<?php namespace prediger\upper\jobs;
 
 use Craft;
 use craft\queue\BaseJob;
-use ostark\upper\Plugin;
+use prediger\upper\Plugin;
 
 /**
  * Class PurgeCache
  *
- * @package ostark\upper\jobs
+ * @package prediger\upper\jobs
  */
 class PurgeCacheJob extends BaseJob
 {
@@ -19,10 +19,10 @@ class PurgeCacheJob extends BaseJob
     /**
      * @inheritdoc
      */
-    public function execute($queue)
+    public function execute($queue): void
     {
         if (!$this->tag) {
-            return false;
+            return;
         }
 
         // Get registered purger

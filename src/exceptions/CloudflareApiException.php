@@ -1,4 +1,4 @@
-<?php namespace ostark\upper\exceptions;
+<?php namespace prediger\upper\exceptions;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

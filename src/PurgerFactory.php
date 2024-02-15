@@ -1,16 +1,16 @@
-<?php namespace ostark\upper;
+<?php namespace prediger\upper;
 
 use Psr\Log\InvalidArgumentException;
 use yii\base\Component;
 
 class PurgerFactory extends Component
 {
-    const DRIVERS_NAMESPACE = 'ostark\upper\drivers';
+    const DRIVERS_NAMESPACE = 'prediger\upper\drivers';
 
     /**
      * @param array $config
      *
-     * @return \ostark\upper\drivers\CachePurgeInterface
+     * @return \prediger\upper\drivers\CachePurgeInterface
      * @throws \yii\base\InvalidConfigException
      */
     public static function create(array $config = [])

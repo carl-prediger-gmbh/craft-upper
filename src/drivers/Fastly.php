@@ -1,8 +1,8 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use ostark\upper\exceptions\FastlyApiException;
+use prediger\upper\exceptions\FastlyApiException;
 
 /**
  * Class Keycdn Driver
@@ -19,7 +19,7 @@ use ostark\upper\exceptions\FastlyApiException;
  * PURGE https://www.example.com/example/uri HTTP/1.1
  * Fastly-Key:{$apiToken}
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  *
  */
 class Fastly extends AbstractPurger implements CachePurgeInterface
@@ -109,7 +109,7 @@ class Fastly extends AbstractPurger implements CachePurgeInterface
      * @param array  $headers
      *
      * @return bool
-     * @throws \ostark\upper\exceptions\FastlyApiException
+     * @throws \prediger\upper\exceptions\FastlyApiException
      */
     protected function sendRequest(string $method = 'PURGE', string $uri, array $headers = [])
     {
@@ -143,8 +143,3 @@ class Fastly extends AbstractPurger implements CachePurgeInterface
         return true;
     }
 }
-
-
-
-
-

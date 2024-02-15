@@ -1,14 +1,15 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
-use ostark\upper\Plugin;
 use yii\base\BaseObject;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 
+use prediger\upper\Plugin;
+
 /**
  * Class AbstractPurger Driver
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  */
 class AbstractPurger extends BaseObject
 {

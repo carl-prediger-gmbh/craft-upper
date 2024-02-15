@@ -1,4 +1,4 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
 use Craft;
 use GuzzleHttp\Client;
@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 /**
  * Class Varnish Driver
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  */
 class Varnish extends AbstractPurger implements CachePurgeInterface
 {

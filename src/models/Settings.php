@@ -1,4 +1,4 @@
-<?php namespace ostark\upper\models;
+<?php namespace prediger\upper\models;
 
 use Craft;
 use craft\base\Model;
@@ -77,7 +77,7 @@ class Settings extends Model
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['driver', 'drivers','keyPrefix'], 'required'],

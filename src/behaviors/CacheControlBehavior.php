@@ -1,4 +1,4 @@
-<?php namespace ostark\upper\behaviors;
+<?php namespace prediger\upper\behaviors;
 
 use yii\base\Behavior;
 use yii\web\Response;
@@ -6,7 +6,7 @@ use yii\web\Response;
 /**
  * Class CacheControlBehavior
  *
- * @package ostark\upper\behaviors
+ * @package prediger\upper\behaviors
  * @property \yii\web\Response $owner
  */
 class CacheControlBehavior extends Behavior

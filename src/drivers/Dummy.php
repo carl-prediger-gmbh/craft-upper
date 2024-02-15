@@ -1,9 +1,9 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
 /**
  * Class Dummy Driver
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  */
 class Dummy extends AbstractPurger implements CachePurgeInterface
 {

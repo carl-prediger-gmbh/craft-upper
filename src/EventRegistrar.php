@@ -1,4 +1,4 @@
-<?php namespace ostark\upper;
+<?php namespace prediger\upper;
 
 use craft\base\Element;
 use craft\elements\db\ElementQuery;
@@ -16,15 +16,15 @@ use craft\services\Structures;
 use craft\utilities\ClearCaches;
 use craft\web\Response;
 use craft\web\View;
-use ostark\upper\events\CacheResponseEvent;
-use ostark\upper\events\PurgeEvent;
-use ostark\upper\jobs\PurgeCacheJob;
+use prediger\upper\events\CacheResponseEvent;
+use prediger\upper\events\PurgeEvent;
+use prediger\upper\jobs\PurgeCacheJob;
 use yii\base\Event;
 
 /**
  * Class EventRegistrar
  *
- * @package ostark\upper
+ * @package prediger\upper
  */
 class EventRegistrar
 {

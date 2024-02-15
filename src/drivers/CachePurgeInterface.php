@@ -1,10 +1,10 @@
-<?php namespace ostark\upper\drivers;
+<?php namespace prediger\upper\drivers;
 
 
 /**
  * Interface CachePurgeInterface
  *
- * @package ostark\upper\drivers
+ * @package prediger\upper\drivers
  */
 interface CachePurgeInterface
 {

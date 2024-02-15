@@ -1,7 +1,7 @@
-<?php namespace ostark\upper\migrations;
+<?php namespace prediger\upper\migrations;
 
 use craft\db\Migration;
-use ostark\upper\Plugin;
+use prediger\upper\Plugin;
 
 /**
  * Install migration.
