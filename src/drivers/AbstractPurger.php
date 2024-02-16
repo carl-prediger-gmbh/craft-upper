@@ -47,6 +47,19 @@ class AbstractPurger extends BaseObject
     }
 
     /**
+     * @param array $urls
+     *
+     * @return bool
+     */
+    public function purgeUrls(array $urls)
+    {
+        $joinedUrls = implode(',', $urls);
+        \Craft::warning("Method purgeUrls([$joinedUrls]') was called - not implemented by driver ", "upper");
+
+        return true;
+    }
+
+    /**
      * Get cached urls by given tag
      *
      * Example result
