@@ -4,6 +4,7 @@ use Craft;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
+
 /**
  * Class Varnish Driver
  *
@@ -27,12 +28,25 @@ class Varnish extends AbstractPurger implements CachePurgeInterface
     public $headers = [];
 
     /**
+     * @var string[]
+     */
+    private iterable $tags_done = [];
+
+    /**
      * @param string $tag
      */
     public function purgeTag(string $tag)
     {
+        if (\in_array($tag, $this->tags_done)) {
+            Craft::info('Upper Varnish Purge Tag: ' . $tag . ' already done');
+            return true;
+        }
         if ($this->useLocalTags) {
-            return $this->purgeUrlsByTag($tag);
+            $result = $this->purgeUrlsByTag($tag);
+            if ($result) {
+                $this->tags_done[] = $tag;
+            }
+            return $result;
         }
 
         return $this->sendPurgeRequest([
