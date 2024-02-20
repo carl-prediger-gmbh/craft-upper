@@ -1,6 +1,9 @@
 <?php namespace ostark\upper;
 
-use craft\base\Element;
+use DateTime;
+
+use yii\base\Event;
+use Craft;
 use craft\elements\db\ElementQuery;
 use craft\events\ElementEvent;
 use craft\events\ElementStructureEvent;
@@ -16,10 +19,10 @@ use craft\services\Structures;
 use craft\utilities\ClearCaches;
 use craft\web\Response;
 use craft\web\View;
+
 use ostark\upper\events\CacheResponseEvent;
 use ostark\upper\events\PurgeEvent;
 use ostark\upper\jobs\PurgeCacheJob;
-use yii\base\Event;
 
 /**
  * Class EventRegistrar
@@ -254,24 +257,49 @@ class EventRegistrar
             return;
         }
 
+        $postDate = \property_exists($event->element, 'postDate') ? $event->element->postDate : null;
+        $expiryDate = \property_exists($event->element, 'expiryDate') ? $event->element->expiryDate : null;
+
         foreach ($tags as $tag) {
-            $tag = Plugin::getInstance()->getTagCollection()->prepareTag($tag);
-
-            $purgeEvent = new PurgeEvent([
-                'tag' => $tag,
-            ]);
-
-            Plugin::getInstance()->trigger(Plugin::EVENT_BEFORE_PURGE, $purgeEvent);
-
-            // Push to queue
-            \Craft::$app->getQueue()->push(new PurgeCacheJob([
-                    'tag' => $purgeEvent->tag
-                ]
-            ));
-
-            Plugin::getInstance()->trigger(Plugin::EVENT_AFTER_PURGE, $purgeEvent);
+            self::purgeCacheTag($tag, $postDate, $expiryDate);
         }
-
     }
 
+    protected static function purgeCacheTag(string $tag, ?DateTime $validFrom = null, ?DateTime $validUntil = null)
+    {
+        $purgeEvent = self::createPurgeEvent($tag);
+
+        Plugin::getInstance()->trigger(Plugin::EVENT_BEFORE_PURGE, $purgeEvent);
+
+        $queue = Craft::$app->getQueue();
+        $delay = $validFrom === null ? 0 : self::getDelayInSeconds($validFrom);
+        if ($delay > 0) {
+            $queue->delay($delay);
+        }
+        $queue->push(new PurgeCacheJob(['tag' => $purgeEvent->tag]));
+        if ($validUntil !== null) {
+            $delay = self::getDelayInSeconds($validUntil);
+            if ($delay > 0) {
+                $queue->delay($delay);
+                $queue->push(new PurgeCacheJob(['tag' => $purgeEvent->tag]));
+            }
+        }
+
+        Plugin::getInstance()->trigger(Plugin::EVENT_AFTER_PURGE, $purgeEvent);
+    }
+
+    private static function createPurgeEvent(string $tag): PurgeEvent
+    {
+        $tagCollection = Plugin::getInstance()->getTagCollection();
+        return new PurgeEvent(['tag' => $tagCollection->prepareTag($tag)]);
+    }
+
+    private static function getDelayInSeconds(DateTime $dateTime): int
+    {
+        $delay = $dateTime->getTimestamp() - \time();
+        if ($delay > 0) {
+            return $delay;
+        }
+        return 0;
+    }
 }

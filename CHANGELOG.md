@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.1.0] - 2024-02-20
+- Delay cache purges for timed entries
+
 ## [2.0.0] - 2024-02-16
 - Craft 4 update
 
