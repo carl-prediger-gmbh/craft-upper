@@ -257,8 +257,13 @@ class EventRegistrar
             return;
         }
 
-        $postDate = \property_exists($event->element, 'postDate') ? $event->element->postDate : null;
-        $expiryDate = \property_exists($event->element, 'expiryDate') ? $event->element->expiryDate : null;
+        if (\property_exists($event, 'element')) {
+            $postDate = \property_exists($event->element, 'postDate') ? $event->element->postDate : null;
+            $expiryDate = \property_exists($event->element, 'expiryDate') ? $event->element->expiryDate : null;
+        } else {
+            $postDate = null;
+            $expiryDate = null;
+        }
 
         foreach ($tags as $tag) {
             self::purgeCacheTag($tag, $postDate, $expiryDate);
