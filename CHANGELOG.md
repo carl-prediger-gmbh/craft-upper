@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2] - 2024-02-20
+- Fixed depricated section usage
+
+## [3.0.0] - 2024-02-20
+- Prepare support for Craft 5
+
 ## [2.1.0] - 2024-02-20
 - Delay cache purges for timed entries
 

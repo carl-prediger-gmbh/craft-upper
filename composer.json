@@ -2,7 +2,7 @@
   "name": "carl-prediger-gmbh/craft-upper",
   "description": "A cache plugin for Craft - supporting multiple Edge Caches",
   "type": "craft-plugin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "keywords": [
     "craft",
     "cms",
