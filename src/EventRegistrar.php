@@ -14,7 +14,6 @@ use craft\events\SectionEvent;
 use craft\events\TemplateEvent;
 use craft\helpers\ElementHelper;
 use craft\services\Elements;
-use craft\services\Sections;
 use craft\services\Structures;
 use craft\utilities\ClearCaches;
 use craft\web\Response;
@@ -43,10 +42,6 @@ class EventRegistrar
         Event::on(Structures::class, Structures::EVENT_AFTER_MOVE_ELEMENT, function ($event) {
             static::handleUpdateEvent($event);
         });
-        Event::on(Sections::class, Sections::EVENT_AFTER_SAVE_SECTION, function ($event) {
-            static::handleUpdateEvent($event);
-        });
-
     }
 
     public static function registerFrontendEvents()
