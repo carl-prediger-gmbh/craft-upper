@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0] - 2025-04-16
+- Purge elements on `EVENT_AFTER_APPLY_DRAFT` event
+
+## [3.1.0] 
+- Trigger events on tag purges
+
 ## [3.0.2] - 2024-02-20
 - Fixed depricated section usage
 

@@ -1,10 +1,13 @@
 <?php namespace ostark\upper;
 
+use craft\services\Drafts;
 use DateTime;
 
 use yii\base\Event;
+
 use Craft;
 use craft\elements\db\ElementQuery;
+use craft\events\DraftEvent;
 use craft\events\ElementEvent;
 use craft\events\ElementStructureEvent;
 use craft\events\MoveElementEvent;
@@ -40,6 +43,9 @@ class EventRegistrar
             static::handleUpdateEvent($event);
         });
         Event::on(Structures::class, Structures::EVENT_AFTER_MOVE_ELEMENT, function ($event) {
+            static::handleUpdateEvent($event);
+        });
+        Event::on(Drafts::class, Drafts::EVENT_AFTER_APPLY_DRAFT, function ($event) {
             static::handleUpdateEvent($event);
         });
     }
@@ -246,6 +252,10 @@ class EventRegistrar
 
         if ($event instanceof MoveElementEvent or $event instanceof ElementStructureEvent) {
             $tags[] = Plugin::TAG_PREFIX_STRUCTURE . $event->structureId;
+        }
+
+        if ($event instanceof DraftEvent) {
+            $tags[] = Plugin::TAG_PREFIX_ELEMENT . $event->canonical->getId();
         }
 
         if (count($tags) === 0) {
