@@ -1,5 +1,7 @@
 <?php namespace ostark\upper;
 
+use craft\base\Element;
+use craft\elements\Category;
 use DateTime;
 
 use yii\base\Event;
@@ -51,6 +53,9 @@ class EventRegistrar
             static::handleUpdateEvent($event);
         });
         Event::on(ImageTransformer::class, ImageTransformer::EVENT_TRANSFORM_IMAGE, function ($event) {
+            static::handleUpdateEvent($event);
+        });
+        Event::on(Category::class, Element::EVENT_AFTER_SAVE, function ($event) {
             static::handleUpdateEvent($event);
         });
     }
