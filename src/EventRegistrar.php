@@ -95,6 +95,7 @@ class EventRegistrar
             if ($event->element instanceof \craft\elements\Asset) {
                 $tag = Plugin::TAG_PREFIX_ASSET . $event->element->getId();
                 Plugin::getInstance()->getTagCollection()->add($tag);
+                return;
             }
 
             // Add to collection
