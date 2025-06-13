@@ -30,6 +30,7 @@ class Plugin extends BasePlugin
     const TAG_PREFIX_ELEMENT = 'el';
     const TAG_PREFIX_SECTION = 'se';
     const TAG_PREFIX_STRUCTURE = 'st';
+    const TAG_PREFIX_ASSET = 'as';
 
     // Mapping element properties <> tag prefixes
     const ELEMENT_PROPERTY_MAP = [

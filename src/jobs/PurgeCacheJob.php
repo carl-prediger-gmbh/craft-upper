@@ -12,6 +12,8 @@ use ostark\upper\Plugin;
  */
 class PurgeCacheJob extends BaseJob
 {
+    const FULL_TAG = '*';
+
     /**
      * @var string tag
      */
@@ -29,7 +31,11 @@ class PurgeCacheJob extends BaseJob
         // Get registered purger
         $purger = Plugin::getInstance()->getPurger();
         Plugin::getInstance()->trigger(Plugin::EVENT_JOB_BEFORE_PURGE, new PurgeEvent(['tag' => $this->tag]));
-        $purger->purgeTag($this->tag);
+        if ($this->tag === self::FULL_TAG) {
+            $purger->purgeAll();
+        } else {
+            $purger->purgeTag($this->tag);
+        }
         Plugin::getInstance()->trigger(Plugin::EVENT_JOB_AFTER_PURGE, new PurgeEvent(['tag' => $this->tag]));
     }
 

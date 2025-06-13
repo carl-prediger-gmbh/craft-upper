@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.3.0] - 2025-06-10
+- Purge elements on `EVENT_TRANSFORM_IMAGE` event
+
 ## [3.2.0] - 2025-04-16
 - Purge elements on `EVENT_AFTER_APPLY_DRAFT` event
 

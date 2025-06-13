@@ -1,6 +1,7 @@
 <?php namespace ostark\upper;
 
-use craft\services\Drafts;
+use craft\base\Element;
+use craft\elements\Category;
 use DateTime;
 
 use yii\base\Event;
@@ -10,12 +11,15 @@ use craft\elements\db\ElementQuery;
 use craft\events\DraftEvent;
 use craft\events\ElementEvent;
 use craft\events\ElementStructureEvent;
+use craft\events\ImageTransformerOperationEvent;
 use craft\events\MoveElementEvent;
 use craft\events\PopulateElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\SectionEvent;
 use craft\events\TemplateEvent;
 use craft\helpers\ElementHelper;
+use craft\imagetransforms\ImageTransformer;
+use craft\services\Drafts;
 use craft\services\Elements;
 use craft\services\Structures;
 use craft\utilities\ClearCaches;
@@ -46,6 +50,12 @@ class EventRegistrar
             static::handleUpdateEvent($event);
         });
         Event::on(Drafts::class, Drafts::EVENT_AFTER_APPLY_DRAFT, function ($event) {
+            static::handleUpdateEvent($event);
+        });
+        Event::on(ImageTransformer::class, ImageTransformer::EVENT_TRANSFORM_IMAGE, function ($event) {
+            static::handleUpdateEvent($event);
+        });
+        Event::on(Category::class, Element::EVENT_AFTER_SAVE, function ($event) {
             static::handleUpdateEvent($event);
         });
     }
@@ -85,6 +95,12 @@ class EventRegistrar
             // Tag with GlobalSet handle
             if ($event->element instanceof \craft\elements\GlobalSet) {
                 Plugin::getInstance()->getTagCollection()->add($event->element->handle);
+            }
+
+            if ($event->element instanceof \craft\elements\Asset) {
+                $tag = Plugin::TAG_PREFIX_ASSET . $event->element->getId();
+                Plugin::getInstance()->getTagCollection()->add($tag);
+                return;
             }
 
             // Add to collection
@@ -256,6 +272,10 @@ class EventRegistrar
 
         if ($event instanceof DraftEvent) {
             $tags[] = Plugin::TAG_PREFIX_ELEMENT . $event->canonical->getId();
+        }
+
+        if ($event instanceof ImageTransformerOperationEvent) {
+            $tags[] = Plugin::TAG_PREFIX_ASSET . $event->asset->getId();
         }
 
         if (count($tags) === 0) {
