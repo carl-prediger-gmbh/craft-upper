@@ -119,9 +119,6 @@ class EventRegistrar
             $settings      = $plugin->getSettings();
             $headers       = $response->getHeaders();
 
-            // Make existing cache-control headers accessible
-            $response->setCacheControlDirectiveFromString($headers->get('cache-control'));
-
             // Don't cache if private | no-cache set already
             if ($response->hasCacheControlDirective('private') || $response->hasCacheControlDirective('no-cache')) {
                 $headers->set(Plugin::INFO_HEADER_NAME, 'BYPASS');
